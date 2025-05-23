@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đăng ký</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .register-box {
+      background: #222;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 350px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background: #00cc66;
+      color: white;
+      cursor: pointer;
+    }
+    a {
+      color: #00cc66;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Đăng ký</h2>
+    <form action="/register" method="POST">
+      <input type="text" name="email" placeholder="Tài khoản" required />
+      <input type="password" name="password" placeholder="Mật khẩu" required />
+      <button type="submit">Đăng ký</button>
+    </form>
+    <a href="/login.html">Đăng nhập</a>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('error') === 'exists') {
+      document.getElementById('message').innerText = "Tài khoản đã tồn tại!";
+    }
+  </script>
+</body>
+</html>

